@@ -2,38 +2,38 @@ class GroupCities
 {
     static void Main()
     {
-        List<string> miasta = new List<string>();
-        string? wejscie;
+        List<string> cities = new List<string>();
+        string? input;
 
         while (true)
         {
-            wejscie = Console.ReadLine();
+            input = Console.ReadLine();
 
-            if (wejscie != null && wejscie.Trim().Equals("X", StringComparison.OrdinalIgnoreCase))
+            if (input != null && input.Trim().Equals("X", StringComparison.OrdinalIgnoreCase))
                 break;
 
-            if (!string.IsNullOrWhiteSpace(wejscie))
-                miasta.Add(wejscie.Trim());
+            if (!string.IsNullOrWhiteSpace(input))
+                cities.Add(input.Trim());
         }
 
         while (true)
         {
-            char litera = Console.ReadLine()[0];
+            char letter = Console.ReadLine()[0];
 
-            if (litera == 'X' || litera == 'x')
+            if (letter == 'X' || letter == 'x')
                 break;
 
-            var miastaNaLitere = miasta
+            var citiesStartingWith = cities
                 .GroupBy(m => m[0])
                 .OrderBy(g => g.Key)
-                .Where(g => char.ToUpper(g.Key) == char.ToUpper(litera))
+                .Where(g => char.ToUpper(g.Key) == char.ToUpper(letter))
                 .SelectMany(g => g)
                 .OrderBy(m => m)
                 .ToList();
 
             Console.WriteLine(
-                miastaNaLitere.Any()
-                    ? string.Join(", ", miastaNaLitere)
+                citiesStartingWith.Any()
+                    ? string.Join(", ", citiesStartingWith)
                     : "PUSTE"
             );
         }

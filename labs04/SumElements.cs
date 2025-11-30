@@ -15,17 +15,17 @@ class SumElements
             )
             .ToList();
 
-        long suma = matrix
+        long sum = matrix
             .SelectMany(row => row)
             .Sum(x => (long)x);
 
-        Console.WriteLine(suma);
+        Console.WriteLine(sum);
 
-        string wynik = string.Join(
+        string result = string.Join(
             "\n",
             matrix.Select(row => string.Join(" ", row))
         );
 
-        Console.WriteLine(wynik);
+        Console.WriteLine(result);
     }
 }
