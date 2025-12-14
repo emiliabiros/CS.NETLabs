@@ -1,0 +1,89 @@
+@page "/pagelibrary"
+
+<PageTitle>Page Library</PageTitle>
+
+<h1>Page Library</h1>
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Enter URL" 
+           @bind="PageUrl" @oninput="@((e) => TrimPageUrl((string)e.Value))" />
+    <button class="btn btn-primary" @onclick="AddPage">+</button>
+</div>
+
+@if (!string.IsNullOrEmpty(CleanedName))
+{
+    <p>Cleaned name: <strong>@CleanedName</strong></p>
+}
+
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        background-color: #2196F3;
+        padding: 10px;
+        gap: 10px;
+    }
+    .grid-item {
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+    }
+</style>
+
+<div class="grid-container">
+    @if (Pages.Count == 0)
+    {
+        <div style="grid-column: 1 / -1; text-align: center; color: white; padding: 20px;">
+            <p>no pages to show</p>
+        </div>
+    }
+    else
+    {
+        @foreach (var page in Pages)
+        {
+            <div class="grid-item">
+                @((MarkupString)page.Html)
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private string PageUrl { get; set; } = string.Empty;
+    private string CleanedName { get; set; } = string.Empty;
+    private List<BlazorApp.Data.Page> Pages { get; set; } = new();
+
+    private void TrimPageUrl(string url)
+    {
+        var cleaned = url
+            .Replace("http://", "")
+            .Replace("https://", "")
+            .Replace("www.", "")
+            .Trim();
+        
+        CleanedName = cleaned.Split('.').FirstOrDefault() ?? string.Empty;
+    }
+
+    private void AddPage()
+    {
+        if (!string.IsNullOrEmpty(PageUrl))
+        {
+            var fullUrl = PageUrl;
+            if (!fullUrl.StartsWith("http://") && !fullUrl.StartsWith("https://"))
+            {
+                fullUrl = "https://" + fullUrl;
+            }
+
+            Pages.Add(new BlazorApp.Data.Page
+            {
+                Url = fullUrl,
+                Name = CleanedName
+            });
+
+            PageUrl = string.Empty;
+            CleanedName = string.Empty;
+        }
+    }
+}
