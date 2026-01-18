@@ -1,9 +1,5 @@
-# .NET build files
 bin/
 obj/
-
-# Rider
 .idea/
-
-# macOS
 .DS_Store
+*.user

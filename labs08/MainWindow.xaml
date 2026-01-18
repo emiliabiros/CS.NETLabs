@@ -1,0 +1,63 @@
+﻿<Window x:Class="stock_market.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Stock Monitor" Height="450" Width="600" Background="Black">
+    
+    <Window.Resources>
+        <Style x:Key="BlockStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Box1" Grid.Row="0" Grid.Column="0" Style="{StaticResource BlockStyle}">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="KGHM" FontSize="30"/>
+                <TextBlock x:Name="Price1" Text="100.05 PLN" FontSize="40"/>
+                <TextBlock x:Name="Change1" Text="0.00 PLN" FontSize="25"/>
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="Box2" Grid.Row="0" Grid.Column="1" Style="{StaticResource BlockStyle}">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="PKO BP" FontSize="30"/>
+                <TextBlock x:Name="Price2" Text="43.07 PLN" FontSize="40"/>
+                <TextBlock x:Name="Change2" Text="0.00 PLN" FontSize="25"/>
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="Box3" Grid.Row="1" Grid.Column="0" Style="{StaticResource BlockStyle}">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="LOTOS" FontSize="30"/>
+                <TextBlock x:Name="Price3" Text="98.07 PLN" FontSize="40"/>
+                <TextBlock x:Name="Change3" Text="0.00 PLN" FontSize="25"/>
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="Box4" Grid.Row="1" Grid.Column="1" Style="{StaticResource BlockStyle}">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="ORLEN" FontSize="30"/>
+                <TextBlock x:Name="Price4" Text="100.05 PLN" FontSize="40"/>
+                <TextBlock x:Name="Change4" Text="0.00 PLN" FontSize="25"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
